@@ -40,23 +40,21 @@ The **Automated Timetable Generator** is a full-stack web application built to e
 ## 📁 Project Structure
 
 ├── app/
-│ ├── migrations/
-│ ├── templates/
-│ ├── static/
-│ ├── admin.py
-│ ├── models.py
-│ ├── views.py
-│ └── urls.py
+│   ├── migrations/
+│   ├── templates/
+│   ├── static/
+│   ├── admin.py
+│   ├── models.py
+│   ├── views.py
+│   └── urls.py
 │
-├── time_table/ # Django project settings
-├── dataset/ # Input CSV files
-├── db.sqlite3 # Database
-├── manage.py # Django CLI
+├── time_table/          # Django project settings
+├── dataset/             # Input CSV files
+├── db.sqlite3           # Database
+├── manage.py            # Django CLI
 └── README.md
 
-
 ---
-
 
 ## 📝 How to Use
 
@@ -86,7 +84,7 @@ python manage.py migrate
 ## Start the development server
 python manage.py runserver
 
-
+---
 
 ## 👨‍💻 Authors
 
