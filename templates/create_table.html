@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container mt-4">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Create Time Table</h2>
+
+        <form id="scheduleForm">
+            <!-- Select Department & Division -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="department" class="form-label">Select Department</label>
+                    <select id="department" class="form-control" required>
+                        <option value="" disabled selected>Choose Department</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+                        <option value="Mechanical">Mechanical</option>
+                        <option value="Civil">Civil</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="division" class="form-label">Select Division</label>
+                    <select id="division" class="form-control" required>
+                        <option value="" disabled selected>Choose Division</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Year Sections -->
+            <div id="yearSections"></div>
+
+            <!-- College Timings -->
+            <h4 class="mt-4">College Timings</h4>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="startTime" class="form-label">Lecture Start Time</label>
+                    <input type="time" id="startTime" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="endTime" class="form-label">College End Time</label>
+                    <input type="time" id="endTime" class="form-control" required>
+                </div>
+            </div>
+
+            <!-- Session Details -->
+            <h4 class="mt-4">Session Details</h4>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="sessionsPerDay" class="form-label">Sessions Per Day</label>
+                    <input type="number" id="sessionsPerDay" class="form-control" min="1" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="maxLectures" class="form-label">Max Lectures Per Day</label>
+                    <input type="number" id="maxLectures" class="form-control" min="1" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="maxPracticals" class="form-label">Max Practicals Per Day</label>
+                    <input type="number" id="maxPracticals" class="form-control" min="1" required>
+                </div>
+            </div>
+
+            <!-- Recess Timings -->
+            <h4 class="mt-4">Recess Timings</h4>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="recess1Start" class="form-label">Recess 1 Start Time</label>
+                    <input type="time" id="recess1Start" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="recess1End" class="form-label">Recess 1 End Time</label>
+                    <input type="time" id="recess1End" class="form-control">
+                </div>
+            </div>
+
+            <!-- Short Recess -->
+            <h4 class="mt-4">Short Recess Timings</h4>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="shortRecessStart" class="form-label">Short Recess Start Time</label>
+                    <input type="time" id="shortRecessStart" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="shortRecessEnd" class="form-label">Short Recess End Time</label>
+                    <input type="time" id="shortRecessEnd" class="form-control">
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById("department").addEventListener("change", function () {
+        let divisionDropdown = document.getElementById("division");
+        divisionDropdown.innerHTML = "<option value='' disabled selected>Choose Division</option>";
+        ["A", "B", "C", "D"].forEach(div => {
+            let option = document.createElement("option");
+            option.value = div;
+            option.textContent = div;
+            divisionDropdown.appendChild(option);
+        });
+    });
+
+    let yearSections = document.getElementById("yearSections");
+    ["Second Year", "Third Year", "Fourth Year"].forEach(year => {
+        let yearDiv = document.createElement("div");
+        yearDiv.classList.add("mb-3");
+        yearDiv.innerHTML = `
+            <h4 class='mt-4'>${year}</h4>
+            <div class='row mb-3'>
+                <div class='col-md-6'>
+                    <label class='form-label'>Number of Subjects</label>
+                    <input type='number' class='form-control numSubjects' data-year='${year}' min='1' placeholder='Enter number of subjects'>
+                </div>
+            </div>
+            <div class='subjectFields' data-year='${year}'></div>
+        `;
+        yearSections.appendChild(yearDiv);
+    });
+
+    document.getElementById("yearSections").addEventListener("input", function (event) {
+        if (event.target.classList.contains("numSubjects")) {
+            let numSubjects = parseInt(event.target.value) || 0;
+            let year = event.target.getAttribute("data-year");
+            let subjectFields = document.querySelector(`.subjectFields[data-year='${year}']`);
+            subjectFields.innerHTML = "";
+            for (let i = 1; i <= numSubjects; i++) {
+                let div = document.createElement("div");
+                div.classList.add("mb-3");
+                div.innerHTML = `
+                    <label class='form-label'>Subject ${i} Name</label>
+                    <input type='text' class='form-control mb-2' placeholder='Enter Subject ${i} Name' required>
+                    <label class='form-label'>Subject ${i} Teacher Name</label>
+                    <input type='text' class='form-control mb-2' placeholder='Enter Teacher Name' required>
+                    <label class='form-label'>Weekly Lecture Count for Subject ${i}</label>
+                    <input type='number' class='form-control mb-2' min='1' placeholder='Enter Weekly Lecture Count' required>
+
+                    <div class='form-check'>
+                        <input class='form-check-input practical-checkbox' type='checkbox' data-subject-index='${i}' data-year='${year}'>
+                        <label class='form-check-label'>Subject ${i} has Practical</label>
+                    </div>
+
+                    <div class='lab-dropdown mt-2' style='display: none;'>
+                        <label class='form-label'>Select Lab for Subject ${i}</label>
+                        <select class='form-control lab-select'>
+                            <option value="" selected disabled>Choose Lab</option>
+                            <option value="deld">DELD</option>
+                            <option value="software">Software</option>
+                            <option value="programming">Programming</option>
+                            <option value="network">Network</option>
+                            <option value="iot">IoT</option>
+                            <option value="spos">SPOS</option>
+                            <option value="project">Project</option>
+                        </select>
+                    </div>
+                `;
+                subjectFields.appendChild(div);
+            }
+        }
+    });
+
+    // Show/hide lab dropdown based on practical checkbox
+    document.getElementById("yearSections").addEventListener("change", function (event) {
+        if (event.target.classList.contains("practical-checkbox")) {
+            let checkbox = event.target;
+            let labDropdown = checkbox.closest("div.mb-3").querySelector(".lab-dropdown");
+            labDropdown.style.display = checkbox.checked ? "block" : "none";
+        }
+    });
+
+    function getSubjects(year) {
+        let subjects = [];
+        document.querySelectorAll(`.subjectFields[data-year='${year}'] > div`).forEach(subjectDiv => {
+            let inputs = subjectDiv.querySelectorAll("input");
+            let labSelect = subjectDiv.querySelector(".lab-select");
+            subjects.push({
+                name: inputs[0].value,
+                teacher: inputs[1].value,
+                weeklyLectures: inputs[2].value,
+                hasPractical: inputs[3].checked,
+                lab: inputs[3].checked ? labSelect.value : null
+            });
+        });
+        return subjects;
+    }
+
+    document.getElementById("scheduleForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        let data = {
+            department: document.getElementById("department").value,
+            division: document.getElementById("division").value,
+            lectureStartTime: document.getElementById("startTime").value,
+            collegeEndTime: document.getElementById("endTime").value,
+            sessionsPerDay: document.getElementById("sessionsPerDay").value,
+            maxLectures: document.getElementById("maxLectures").value,
+            maxPracticals: document.getElementById("maxPracticals").value,
+            recess1Start: document.getElementById("recess1Start").value,
+            recess1End: document.getElementById("recess1End").value,
+            shortRecessStart: document.getElementById("shortRecessStart").value,
+            shortRecessEnd: document.getElementById("shortRecessEnd").value,
+            secondYearSubjects: getSubjects("Second Year"),
+            thirdYearSubjects: getSubjects("Third Year"),
+            fourthYearSubjects: getSubjects("Fourth Year")
+        };
+
+        fetch("{% url 'create_table' %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => alert("Timetable created successfully!"))
+        .catch(error => console.error("Error:", error));
+    });
+</script>
+
+{% endblock %}

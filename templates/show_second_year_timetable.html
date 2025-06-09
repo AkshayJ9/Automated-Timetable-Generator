@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container my-4">
+    <div class="text-center mb-3">
+        <h4 class="text-dark fw-bold">
+           <span style="color:purple"> Guru Gobind Singh Foundation's</span><br>
+           <span style="color:blue">Guru Gobind Singh College of Engineering and Research Centre, Nashik</span><br>
+           <span style="color:brown">Automation &amp; Robotics Engineering Department</span>
+        </h4>
+    </div><hr>
+
+    {% for table in timetables %}
+    <div class="card shadow-lg mb-5">
+        <div class="card-header bg-secondary text-white">
+            <h3 class="text-center">{{ table.department }} - Division {{ table.division }} (Classroom {{ table.classroom }})</h3>
+        </div>
+        <div class="card-body">
+            <h4 class="text-success text-center mt-3">Second Year Timetable</h4>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Time Slot</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if table.timetable.merged %}
+                            {% for row in table.timetable.merged %}
+                            <tr>
+                                {% for cell in row %}
+                                <td class="align-middle">{{ cell|safe }}</td>  <!-- Use safe to allow <br> -->
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr><td colspan="6">No timetable available</td></tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock body %}

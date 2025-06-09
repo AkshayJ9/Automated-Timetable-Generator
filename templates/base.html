@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    {% load static %}
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>GGSF</title>
+
+    <link rel="icon" href="{% static 'img/logo.png' %}" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap1.min.css' %}" />
+    <!-- themefy CSS -->
+    <link rel="stylesheet" href="{% static 'vendors/themefy_icon/themify-icons.css' %}" />
+    <!-- select2 CSS -->
+    <link rel="stylesheet" href="{% static 'vendors/niceselect/css/nice-select.css' %}" />
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{% static 'vendors/owl_carousel/css/owl.carousel.css' %}" />
+    <!-- gijgo css -->
+    <link rel="stylesheet" href="{% static 'vendors/gijgo/gijgo.min.css' %}" />
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{% static 'vendors/font_awesome/css/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/tagsinput/tagsinput.css' %}" />
+
+    <!-- date picker -->
+    <link rel="stylesheet" href="{% static 'vendors/datepicker/date-picker.css' %}" />
+    <!-- scrollable  -->
+    <link rel="stylesheet" href="{% static 'vendors/scroll/scrollable.css' %}" />
+    <!-- datatable CSS -->
+    <link rel="stylesheet" href="{% static 'vendors/datatable/css/jquery.dataTables.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/datatable/css/responsive.dataTables.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/datatable/css/buttons.dataTables.min.css' %}" />
+    <!-- text editor css -->
+    <link rel="stylesheet" href="{% static 'vendors/text_editor/summernote-bs4.css' %}" />
+    <!-- morris css -->
+    <link rel="stylesheet" href="{% static 'vendors/morris/morris.css' %}">
+    <!-- material icon css -->
+    <link rel="stylesheet" href="{% static 'vendors/material_icon/material-icons.css' %}" />
+
+    <!-- menu css  -->
+    <link rel="stylesheet" href="{% static 'css/metisMenu.css' %}">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/colors/default.css' %}" id="colorSkinCSS">
+</head>
+
+<body class="crm_body_bg">
+
+    {% block body %}   
+    {% endblock body %}
+
+    <!-- jquery slim -->
+    <script src="{% static 'js/jquery1-3.4.1.min.js' %}"></script>
+    <!-- popper js -->
+    <script src="{% static 'js/popper1.min.js' %}"></script>
+    <!-- bootstrap js -->
+    <script src="{% static 'js/bootstrap1.min.js' %}"></script>
+    <!-- sidebar menu  -->
+    <script src="{% static 'js/metisMenu.js' %}"></script>
+    
+    <!-- scrollable  -->
+    <script src="{% static 'vendors/scroll/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'vendors/scroll/scrollable-custom.js' %}"></script>
+    
+    <!-- custom js -->
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<script>
+    var m = "{{ message }}";
+    swal("Success!", m, 'success');
+</script>
+{% elif message.tags == 'error' %} <!-- Change 'danger' to 'error' -->
+<script>
+    var m = "{{ message }}";
+    swal("Error!", m, 'error');
+</script>
+{% elif message.tags == 'info' %}
+<script>
+    var m = "{{ message }}";
+    swal(m, "Take care of yourself!!!", 'info');
+</script>
+{% endif %}
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container my-4">
+    <h2 class="text-center text-primary fw-bold">👨‍🏫 Teacher Schedules</h2>
+
+    <!-- Search Bar -->
+    <div class="mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search by Teacher Name, Subject, or Day">
+    </div>
+
+    {% if messages %}
+        <div class="mt-3">
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% for year in years %}
+    <div class="card shadow-lg mb-4">
+        <div class="card-header bg-secondary text-white">
+            <h3 class="text-center">{{ year }} Teacher Schedule</h3>
+        </div>
+        <div class="card-body">
+
+            <!-- Mark Teacher Absent for each Year -->
+            <form method="post" id="absentTeacherForm{{ year }}" class="mb-4">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="absent_teacher_{{ year }}" class="form-label">Select Absent Teacher:</label>
+                        <select name="absent_teacher" id="absent_teacher_{{ year }}" class="form-select" required>
+                            <option value="">-- Select Teacher --</option>
+                            {% for teacher in teacher_schedules %}
+                                {% if teacher.year == year %}
+                                    <option value="{{ teacher.teacher_name }}">{{ teacher.teacher_name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="day_{{ year }}" class="form-label">Select Day:</label>
+                        <select name="day" id="day_{{ year }}" class="form-select" required>
+                            <option value="">-- Select Day --</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="submit" class="btn btn-danger w-100">Mark Absent & Update</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped text-center teacherTable">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Teacher Name</th>
+                            <th>Subject</th>
+                            <th>Time Slot</th>
+                            <th>Day</th>
+                            <th>Department</th>
+                            <th>Division</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for schedule in teacher_schedules %}
+                            {% if schedule.year == year %}
+                            <tr>
+                                <td>{{ schedule.teacher_name }}</td>
+                                <td>{{ schedule.subject }}</td>
+                                <td>{{ schedule.time_slot }}</td>
+                                <td>{{ schedule.day }}</td>
+                                <td>{{ schedule.department }}</td>
+                                <td>{{ schedule.division }}</td>
+                            </tr>
+                            {% endif %}
+                        {% empty %}
+                            <tr><td colspan="6">No schedule available</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    // Search Filter for All Tables
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        let filter = this.value.toLowerCase();
+        let tables = document.querySelectorAll(".teacherTable tbody tr");
+
+        tables.forEach(row => {
+            let text = row.innerText.toLowerCase();
+            row.style.display = text.includes(filter) ? "" : "none";
+        });
+    });
+</script>
+
+{% endblock %}

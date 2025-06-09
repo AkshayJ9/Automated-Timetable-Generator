@@ -1,0 +1,35 @@
+$departments = ["Computer Science", "information technology", "Mechanical","Civil","AIDS"];
+$divisions = ["A", "B"];
+$lectures = [
+    ['subject' => 'physics', 'faculty' => 'sujal', 'Weekly Lecture Count for Subject' => 4, 'is_practical' => true, 'lab' => 'deld'],
+    ['subject' => 'chem', 'faculty' => 'kedar', 'Weekly Lecture Count for Subject' => 3, 'is_practical' => true, 'lab' => 'software'],
+    ['subject' => 'm3', 'faculty' => 'hitesh', 'Weekly Lecture Count for Subject' => 3, 'is_practical' => false],
+    ['subject' => 'ee', 'faculty' => 'vidya', 'Weekly Lecture Count for Subject' => 4, 'is_practical' => true, 'lab' => 'programming'],
+    ['subject' => 'dsa', 'faculty' => 'anjali', 'Weekly Lecture Count for Subject' => 2, 'is_practical' => true, 'lab' => 'network']
+];   //This is second year data
+
+
+$lectures = [
+    ['subject' => 'coa', 'faculty' => 'gaurav', 'Weekly Lecture Count for Subject' => 3, 'is_practical' => true, 'lab' => 'network'],
+    ['subject' => 'pai', 'faculty' => 'tejas', 'Weekly Lecture Count for Subject' => 4, 'is_practical' => true, 'lab' => 'iot'],
+    ['subject' => 'ds', 'faculty' => 'akash', 'Weekly Lecture Count for Subject' => 3, 'is_practical' => true, 'lab' => 'spos'],
+    ['subject' => 'gd', 'faculty' => 'vijay', 'Weekly Lecture Count for Subject' => 2, 'is_practical' => true, 'lab' => 'programming'],
+    ['subject' => 'cc', 'faculty' => 'sujal', 'Weekly Lecture Count for Subject' => 4, 'is_practical' => false]
+];
+//this is third year data
+
+$lectures = [
+    ['subject' => 'dcs', 'faculty' => 'kedar', 'Weekly Lecture Count for Subject' => 3, 'is_practical' => true, 'lab' => 'deld'],
+    ['subject' => 'uc', 'faculty' => 'pp', 'Weekly Lecture Count for Subject' => 4, 'is_practical' => true, 'lab' => 'software'],
+    ['subject' => 'iwp', 'faculty' => 'rs', 'Weekly Lecture Count for Subject' => 3, 'is_practical' => true, 'lab' => 'programming'],
+    ['subject' => 'cc', 'faculty' => 'kk', 'Weekly Lecture Count for Subject' => 4, 'is_practical' => true, 'lab' => 'network']
+];
+//this is third year data 
+
+
+$start = "09:00";
+$end = "15:50";
+$breaks = [
+    ['start' => '11:00', 'end' => '11:40', 'type' => 'long_break'],
+    ['start' => '13:40', 'end' => '13:50', 'type' => 'short_break']
+];
