@@ -1,12 +1,6 @@
 # 🗓️ Automated Timetable Generator
 
-![Python](https://img.shields.io/badge/Backend-Django-green?logo=django)
-![HTML](https://img.shields.io/badge/Frontend-HTML%2FCSS%2FJS-blue)
-![Database](https://img.shields.io/badge/Database-SQLite-lightgrey?logo=sqlite)
-![Status](https://img.shields.io/badge/Project-Completed-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-
-🎓 A Final Year Project by Akshay Jadhav
+🎓 A Final Year Project by **TEAM GCOERC - Group 32**
 
 > A smart, conflict-free, and automated class timetable generation system using Django and SQLite, complete with user roles, CSV uploads, and per-class/faculty views.
 
@@ -14,27 +8,21 @@
 
 ## 🚀 Overview
 
-The **Automated Timetable Generator** is a full-stack web application built to eliminate the hassle of manual timetable creation for colleges and academic institutions. It efficiently handles timetable generation for multiple years and divisions, avoiding all faculty and room conflicts. The project supports second-year, third-year, and final-year students, along with faculty-wise schedule generation.
-
----
-
-## 🧠 Project Flow
-
-![Project Flow](./406547e0-073f-4635-ba4e-8bf8d7db5781.png)
+The **Automated Timetable Generator** is a full-stack web application built to eliminate the hassle of manual timetable creation for colleges and academic institutions. It efficiently generates optimized, conflict-free timetables for multiple academic years and divisions. The project supports timetables for Second Year (SE), Third Year (TE), and Final Year (BE) students, along with faculty-wise schedules — all managed through a simple and intuitive interface.
 
 ---
 
 ## ✨ Key Features
 
-- 🔐 **Secure Login/Authentication** for Admin
-- 📤 conflict free containing teacher and subject data
-- ⚙️ Auto-generation of **conflict-free** academic timetables
-- 👨‍🏫 **Faculty-wise** and **Class-wise** schedule views
-- 📚 Separate timetable creation for **SE / TE / BE divisions**
-- 📄 Print-friendly HTML timetable layouts
-- ⚡ Simple, responsive UI using vanilla HTML/CSS/JS
-- 🧾 Timetable viewing and update interface
-- 🛡️ Error handling for invalid uploads and conflicting data
+- 🔐 Secure login/authentication for admin  
+- 📤 Upload teacher-subject data via CSV files  
+- ⚙️ Automated generation of conflict-free timetables  
+- 👨‍🏫 Faculty-wise and class-wise timetable views  
+- 📚 Separate timetable generation for SE, TE, and BE divisions  
+- 🖨️ Printable and user-friendly timetable layouts  
+- ⚡ Lightweight frontend built with vanilla HTML/CSS/JavaScript  
+- 🧾 Timetable viewing and update interface  
+- 🛡️ Error handling for invalid or duplicate inputs  
 
 ---
 
@@ -69,33 +57,37 @@ The **Automated Timetable Generator** is a full-stack web application built to e
 
 ---
 
+
+---
+
 ## 📝 How to Use
 
 ### 🔧 Prerequisites
 
-- Python 3.x
-- pip (Python package manager)
+- Python 3.x  
+- pip (Python package manager)  
 
-### 🚀 Setup Instructions
+### ⚙️ Setup Instructions
 
 bash
-# Clone the repo
+# Clone the repository
 git clone https://github.com/AkshayJ9/Automated-Timetable-Generator.git
 cd Automated-Timetable-Generator
 
-# Create virtual environment
+# Create a virtual environment
 python -m venv venv
-venv\Scripts\activate    # For Windows
+venv\Scripts\activate      # On Windows
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Migrate database
+# Apply database migrations
 python manage.py makemigrations
 python manage.py migrate
 
-# Run the server
+# Start the development server
 python manage.py runserver
+
 
 
 ## 👨‍💻 Authors
