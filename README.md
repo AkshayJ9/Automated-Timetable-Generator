@@ -58,8 +58,6 @@ The **Automated Timetable Generator** is a full-stack web application built to e
 ---
 
 
----
-
 ## 📝 How to Use
 
 ### 🔧 Prerequisites
@@ -70,22 +68,22 @@ The **Automated Timetable Generator** is a full-stack web application built to e
 ### ⚙️ Setup Instructions
 
 bash
-# Clone the repository
+## Clone the repository
 git clone https://github.com/AkshayJ9/Automated-Timetable-Generator.git
 cd Automated-Timetable-Generator
 
-# Create a virtual environment
+## Create a virtual environment
 python -m venv venv
 venv\Scripts\activate      # On Windows
 
-# Install dependencies
+## Install dependencies
 pip install -r requirements.txt
 
-# Apply database migrations
+## Apply database migrations
 python manage.py makemigrations
 python manage.py migrate
 
-# Start the development server
+## Start the development server
 python manage.py runserver
 
 
